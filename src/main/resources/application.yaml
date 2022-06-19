@@ -1,0 +1,40 @@
+server:
+  port: 8005
+management:
+  server:
+    port: 8095
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /
+spring:
+  datasource:
+    platform: postgres
+    dcs:
+      driverClassName: org.postgesql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=koanba?
+    username: postgres
+    password: postgres
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQL82Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      generate-ddl: true
+      ddl-auto: create-drop
+      show_sql: true
+      format_sql: true
+      use_sql: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    web: DEBUG
