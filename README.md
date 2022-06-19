@@ -7,4 +7,4 @@ test requirement for backend koanba
 - postgresql java connnector
 
 **hint**
-- you can use docker-compose to init postgresql database if you dont have it yet
+- you can use docker-compose to init postgresql database if you dont have it yet (docker required to do this)
