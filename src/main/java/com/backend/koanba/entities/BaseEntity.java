@@ -29,6 +29,10 @@ public abstract class BaseEntity {
         this.updatedAt = updatedAt;
     }
 
+    public BaseEntity() {
+
+    }
+
     public UUID getId() {
         return id;
     }

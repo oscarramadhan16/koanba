@@ -31,6 +31,10 @@ public class ProductEntity extends BaseEntity {
         this.stock = stock;
     }
 
+    public ProductEntity() {
+        super();
+    }
+
     public int getVersion() {
         return version;
     }
