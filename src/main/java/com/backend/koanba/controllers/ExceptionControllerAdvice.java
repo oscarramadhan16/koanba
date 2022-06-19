@@ -2,6 +2,7 @@ package com.backend.koanba.controllers;
 
 import com.backend.koanba.controllers.response.BaseError;
 import com.backend.koanba.controllers.response.BaseErrorResponse;
+import com.backend.koanba.exceptions.CustomerNotFoundException;
 import com.backend.koanba.exceptions.ProductNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,14 @@ public class ExceptionControllerAdvice {
                 new BaseErrorResponse(
                         new BaseError(HttpStatus.NOT_FOUND.value(), e.getMessage())),
                         HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public ResponseEntity<BaseErrorResponse> customerNotFoundException(CustomerNotFoundException e) {
+        log.debug(e.getMessage(), e);
+        return new ResponseEntity<>(
+                new BaseErrorResponse(
+                        new BaseError(HttpStatus.NOT_FOUND.value(), e.getMessage())),
+                HttpStatus.NOT_FOUND);
     }
 }

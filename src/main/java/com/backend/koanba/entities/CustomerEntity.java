@@ -27,6 +27,10 @@ public class CustomerEntity extends BaseEntity {
         this.phone = phone;
     }
 
+    public CustomerEntity() {
+        super();
+    }
+
     public String getName() {
         return name;
     }
