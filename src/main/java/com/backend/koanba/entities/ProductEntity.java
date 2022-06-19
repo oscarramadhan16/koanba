@@ -9,7 +9,7 @@ import java.util.UUID;
 @Table(name = "product", schema = "koanba")
 public class ProductEntity extends BaseEntity {
     @Version
-    private int version;
+    private Long version;
 
     @Column(name = "price", columnDefinition = "DECIMAL", precision = 20, scale = 2, nullable = false)
     private double price;
@@ -23,7 +23,7 @@ public class ProductEntity extends BaseEntity {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderEntity> orders;
 
-    public ProductEntity(UUID id, Date createdAt, Date updatedAt, int version, double price, String description, int stock) {
+    public ProductEntity(UUID id, Date createdAt, Date updatedAt, Long version, double price, String description, int stock) {
         super(id, createdAt, updatedAt);
         this.version = version;
         this.price = price;
@@ -35,11 +35,11 @@ public class ProductEntity extends BaseEntity {
         super();
     }
 
-    public int getVersion() {
+    public Long getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 

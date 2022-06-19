@@ -4,9 +4,11 @@ import com.backend.koanba.controllers.response.BaseError;
 import com.backend.koanba.controllers.response.BaseErrorResponse;
 import com.backend.koanba.exceptions.CustomerNotFoundException;
 import com.backend.koanba.exceptions.ProductNotFoundException;
+import com.backend.koanba.exceptions.ProductQuantityInsufficientException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -39,6 +41,24 @@ public class ExceptionControllerAdvice {
         return new ResponseEntity<>(
                 new BaseErrorResponse(
                         new BaseError(HttpStatus.NOT_FOUND.value(), e.getMessage())),
+                HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ProductQuantityInsufficientException.class)
+    public ResponseEntity<BaseErrorResponse> productQuantityInsufficientException(ProductQuantityInsufficientException e) {
+        log.debug(e.getMessage(), e);
+        return new ResponseEntity<>(
+                new BaseErrorResponse(
+                        new BaseError(HttpStatus.BAD_REQUEST.value(), e.getMessage())),
+                HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    public ResponseEntity<BaseErrorResponse> objectOptimisticLockingFailureException(ObjectOptimisticLockingFailureException e) {
+        log.debug(e.getMessage(), e);
+        return new ResponseEntity<>(
+                new BaseErrorResponse(
+                        new BaseError(HttpStatus.BAD_REQUEST.value(), e.getMessage())),
                 HttpStatus.NOT_FOUND);
     }
 }

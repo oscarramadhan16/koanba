@@ -41,6 +41,10 @@ public class OrderEntity extends BaseEntity {
         this.orderDate = orderDate;
     }
 
+    public OrderEntity() {
+        super();
+    }
+
     public CustomerEntity getCustomer() {
         return customer;
     }
